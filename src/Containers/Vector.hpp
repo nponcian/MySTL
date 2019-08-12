@@ -60,6 +60,16 @@ public:
         return data_[index];
     }
 
+    DataType& front()
+    {
+        return data_[0];
+    }
+
+    DataType& back()
+    {
+        return data_[size_ - 1];
+    }
+
     unsigned capacity() const
     {
         return capacity_;

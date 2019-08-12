@@ -56,7 +56,7 @@ struct SampleClassInt
 
 std::ostream& operator<<(std::ostream& os, const SampleClassInt& obj)
 {
-    return os << "print_SampleClassInt " << obj.intVar_;
+    return os << "print_SampleClassInt_" << obj.intVar_;
 }
 
 struct SampleClassIntAndStr
@@ -118,7 +118,7 @@ struct SampleClassIntAndStr
 
 std::ostream& operator<<(std::ostream& os, const SampleClassIntAndStr& obj)
 {
-    return os << "print_SampleClassIntAndStr " << obj.intVar_ << " " << obj.strVar_;
+    return os << "print_SampleClassIntAndStr_" << obj.intVar_ << "_" << obj.strVar_;
 }
 
 #endif // SRC_SAMPLECLASS_HPP
