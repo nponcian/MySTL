@@ -2,6 +2,7 @@
 #define SRC_CONTAINERS_VECTOR_HPP
 
 #include <iostream>
+#include <iterator>
 #include <string>
 
 namespace mystl
@@ -79,6 +80,123 @@ public:
     {
         return size_;
     }
+
+    class iterator : public std::iterator<std::random_access_iterator_tag, DataType>
+    {
+    public:
+        iterator() :
+            pointer_(nullptr)
+        {
+        }
+
+        iterator(const iterator& other) :
+            pointer_(other.pointer_)
+        {
+        }
+
+        iterator& operator=(const iterator& other)
+        {
+            pointer_ = other.pointer_;
+        }
+
+        iterator& operator++() // prefix ++a
+        {
+            ++pointer_;
+            return *this;
+        }
+
+        iterator operator++(int) // postfix a++
+        {
+            iterator temp(*this);
+            operator++();
+            return temp;
+        }
+
+        iterator& operator--() // prefix --a
+        {
+            --pointer_;
+            return *this;
+        }
+
+        iterator operator--(int) // postfix a--
+        {
+            iterator temp(*this);
+            operator--();
+            return temp;
+        }
+
+        iterator operator+(typename iterator::difference_type n)
+        {
+            iterator temp(*this);
+            return temp += n;
+        }
+
+        iterator operator-(typename iterator::difference_type n)
+        {
+            iterator temp(*this);
+            return temp -= n;
+        }
+
+        iterator& operator+=(typename iterator::difference_type n)
+        {
+            pointer_ += n;
+            return *this;
+        }
+
+        iterator& operator-=(typename iterator::difference_type n)
+        {
+            pointer_ -= n;
+            return *this;
+        }
+
+        bool operator<(const iterator& other) const
+        {
+            return pointer_ < other.pointer_;
+        }
+
+        bool operator>(const iterator& other) const
+        {
+            return pointer_ > other.pointer_;
+        }
+
+        bool operator<=(const iterator& other) const
+        {
+            return pointer_ <= other.pointer_;
+        }
+
+        bool operator>=(const iterator& other) const
+        {
+            return pointer_ >= other.pointer_;
+        }
+
+        bool operator==(const iterator& other) const
+        {
+            return pointer_ == other.pointer_;
+        }
+
+        bool operator!=(const iterator& other) const
+        {
+            return pointer_ != other.pointer_; // similar to: return !(*this == other);
+        }
+
+        typename iterator::reference operator*()
+        {
+            return *pointer_;
+        }
+
+        typename iterator::pointer operator->()
+        {
+            return pointer_;
+        }
+
+        typename iterator::reference operator[](typename iterator::difference_type n)
+        {
+            return *(pointer_ + n);
+        }
+
+    private:
+        typename iterator::pointer pointer_; // similar to: DataType* it_; // Please see std::iterator template arguments and typedefs
+    };
 
 private:
     void cleanUpData()
