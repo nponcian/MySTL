@@ -12,6 +12,8 @@ template <typename DataType>
 class vector
 {
 public:
+    // Take note that iterator to vector is invalidated if vector has internally moved!
+
     class iterator : public std::iterator<std::random_access_iterator_tag, DataType>
     {
     public:
@@ -20,7 +22,7 @@ public:
         using reference = typename std::iterator<std::random_access_iterator_tag, DataType>::reference;
 
         iterator() : pointer_(nullptr) {}
-        iterator(pointer otherPointer) : pointer_(otherPointer) {}
+        iterator(pointer otherPointer) : pointer_(otherPointer) {} // pointer is just an alias to DataType* // Please see std::iterator template arguments and typedefs
         iterator(const iterator& other) : pointer_(other.pointer_) {}
         iterator& operator=(const iterator& other) { pointer_ = other.pointer_; }
 
@@ -50,7 +52,7 @@ public:
         reference operator[](difference_type n) const { return *(pointer_ + n); }
 
     private:
-        pointer pointer_; // similar to: DataType* it_; // Please see std::iterator template arguments and typedefs
+        pointer pointer_; // similar to: DataType* pointer_; // Please see std::iterator template arguments and typedefs
     };
 
     class const_iterator : public std::iterator<std::random_access_iterator_tag, DataType>
@@ -142,22 +144,10 @@ public:
     unsigned capacity() const { return capacity_; }
     unsigned size() const { return size_; }
 
-    iterator begin()
-    {
-        return iterator(data_);
-    }
-    const_iterator begin() const
-    {
-        return const_iterator(data_);
-    }
-    iterator end()
-    {
-        return iterator(data_ + size_);
-    }
-    const_iterator end() const
-    {
-        return const_iterator(data_ + size_);
-    }
+    iterator begin() { return iterator(data_); }
+    iterator end() { return iterator(data_ + size_); }
+    const_iterator begin() const { return const_iterator(data_); }
+    const_iterator end() const { return const_iterator(data_ + size_); }
 
 private:
     void cleanUpData()
