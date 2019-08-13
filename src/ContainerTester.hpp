@@ -9,9 +9,39 @@ namespace src
 void testContainer();
 
 template <typename T>
-void printUsingBeginToEnd(const T& t)
+void printUsingBeginToEndUsingLessCompare(T& t)
 {
-    std::cout << "\n" << "Printing Container (begin to end)...";
+    std::cout << "\n" << __FUNCTION__;
+    for (auto it = t.begin(); it < t.end(); ++it)
+    {
+        std::cout << "\n\t" << *it << " " << &(*it);
+    }
+}
+
+template <typename T>
+void printUsingConstBeginToEndUsingLessCompare(const T& t)
+{
+    std::cout << "\n" << __FUNCTION__ << "...";
+    for (auto it = t.begin(); it < t.end(); ++it)
+    {
+        std::cout << "\n\t" << *it << " " << &(*it);
+    }
+}
+
+template <typename T>
+void printUsingRangeBasedForLoop(T& t)
+{
+    std::cout << "\n" << __FUNCTION__ << "...";
+    for (auto& item : t)
+    {
+        std::cout << "\n\t" << item << " " << &item;
+    }
+}
+
+template <typename T>
+void printUsingConstRangeBasedForLoop(const T& t)
+{
+    std::cout << "\n" << __FUNCTION__ << "...";
     for (const auto& item : t)
     {
         std::cout << "\n\t" << item << " " << &item;
@@ -21,7 +51,7 @@ void printUsingBeginToEnd(const T& t)
 template <typename T>
 void printUsingAtAndSize(const T& t)
 {
-    std::cout << "\n" << "Printing Container (at and size)...";
+    std::cout << "\n" << __FUNCTION__ << "...";
     for (unsigned index = 0; index < t.size(); ++index)
     {
         std::cout << "\n\t" << t.at(index) << " " << &(t.at(index));
@@ -31,7 +61,7 @@ void printUsingAtAndSize(const T& t)
 template <typename T>
 void printUsingBracketAndSize(T& t)
 {
-    std::cout << "\n" << "Printing Container ([] and size)...";
+    std::cout << "\n" << __FUNCTION__ << "...";
     for (unsigned index = 0; index < t.size(); ++index)
     {
         std::cout << "\n\t" << t[index] << " " << &(t[index]);

@@ -40,27 +40,27 @@ void testContainer()
     // Put your code here, remember to clean it up!
 
     mystl::vector<SampleClassInt> vec;
-    printUsingAtAndSize(vec);
+    // mystl::vector<SampleClassIntAndStr> vec;
 
     vec.push_back(sampleClass[0]);
     vec.push_back(sampleClass[1]);
     vec.push_back(sampleClass[2]);
-    printUsingBracketAndSize(vec);
+    printUsingBeginToEndUsingLessCompare(vec);
 
     vec.push_back(sampleClass[3]);
     vec.push_back(sampleClass[4]);
     vec.push_back(sampleClass[5]);
-    printUsingAtAndSize(vec);
+    printUsingConstBeginToEndUsingLessCompare(vec);
 
     vec.push_back(sampleClass[6]);
     vec.push_back(sampleClass[7]);
     vec.push_back(sampleClass[8]);
-    printUsingBracketAndSize(vec);
+    printUsingRangeBasedForLoop(vec);
 
     vec.push_back(sampleClass[9]);
     vec.push_back(sampleClass[0]);
     vec.push_back(sampleClass[1]);
-    printUsingAtAndSize(vec);
+    printUsingConstRangeBasedForLoop(vec);
 
     // End of code
 }
