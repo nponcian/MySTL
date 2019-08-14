@@ -65,6 +65,7 @@ public:
         const_iterator() : pointer_(nullptr) {}
         const_iterator(pointer otherPointer) : pointer_(otherPointer) {}
         const_iterator(const const_iterator& other) : pointer_(other.pointer_) {}
+        const_iterator(const iterator& other) : pointer_(other.pointer_) {}
         const_iterator& operator=(const const_iterator& other) { pointer_ = other.pointer_; }
 
         const_iterator& operator++() { ++pointer_; return *this; }
