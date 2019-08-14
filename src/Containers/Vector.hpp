@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <iterator>
-#include <string>
 
 namespace mystl
 {
@@ -12,8 +11,6 @@ template <typename DataType>
 class vector
 {
 public:
-    // Take note that iterator to vector is invalidated if vector has internally moved!
-
     class iterator : public std::iterator<std::random_access_iterator_tag, DataType>
     {
     public:
@@ -113,27 +110,9 @@ public:
     void push_back(const DataType& data)
     {
         std::cout << "\n" << "push_back";
-        if (size_ < capacity_)
-        {
-            new (data_ + size_) DataType(data);
-            ++size_;
-            return;
-        }
-
-        std::cout << "\n" << "moving... " << capacity_ << " " << size_;
-        DataType* temporaryData = static_cast<DataType*>(::operator new(
-                                    sizeof(DataType) * capacity_ * MEMORY_EXPANSION_MULTIPLIER_));
-        for (unsigned index = 0u; index < capacity_; ++index)
-        {
-            std::cout << "\n" << "moving from " << data_ + index << " to " << temporaryData + index;
-            new (temporaryData + index) DataType(data_[index]);
-        }
-        ::operator delete (data_);
-        data_ = temporaryData;
-        capacity_ *= MEMORY_EXPANSION_MULTIPLIER_;
-        std::cout << "\n" << "moving done " << capacity_ << " " << size_;
-
-        push_back(data);
+        if (size_ >= capacity_) moveData();
+        new (data_ + size_) DataType(data);
+        ++size_;
     }
 
     DataType& at(const unsigned index) const { return data_[index]; }
@@ -144,6 +123,7 @@ public:
 
     unsigned capacity() const { return capacity_; }
     unsigned size() const { return size_; }
+    bool empty() const { return size_ == EMPTY_SIZE_; }
 
     iterator begin() { return iterator(data_); }
     iterator end() { return iterator(data_ + size_); }
@@ -151,6 +131,22 @@ public:
     const_iterator end() const { return const_iterator(data_ + size_); }
 
 private:
+    void moveData()
+    {
+        std::cout << "\n" << "Moving... " << capacity_ << " " << size_;
+        DataType* temporaryData = static_cast<DataType*>(::operator new(
+                                    sizeof(DataType) * capacity_ * MEMORY_EXPANSION_MULTIPLIER_));
+        for (unsigned index = 0u; index < capacity_; ++index)
+        {
+            std::cout << "\n" << "Moving from " << data_ + index << " to " << temporaryData + index;
+            new (temporaryData + index) DataType(data_[index]);
+        }
+        ::operator delete (data_);
+        data_ = temporaryData;
+        capacity_ *= MEMORY_EXPANSION_MULTIPLIER_;
+        std::cout << "\n" << "Moving done " << capacity_ << " " << size_;
+    }
+
     void cleanUpData()
     {
         ::operator delete (data_);
