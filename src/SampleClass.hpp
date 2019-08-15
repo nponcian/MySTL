@@ -91,6 +91,36 @@ struct SampleClassInt
                     << intVar_;
     }
 
+    bool operator==(const SampleClassInt& other) const
+    {
+        return intVar_ == other.intVar_;
+    }
+
+    bool operator!=(const SampleClassInt& other) const
+    {
+        return intVar_ != other.intVar_;
+    }
+
+    bool operator<(const SampleClassInt& other) const
+    {
+        return intVar_ < other.intVar_;
+    }
+
+    bool operator<=(const SampleClassInt& other) const
+    {
+        return intVar_ <= other.intVar_;
+    }
+
+    bool operator>(const SampleClassInt& other) const
+    {
+        return intVar_ > other.intVar_;
+    }
+
+    bool operator>=(const SampleClassInt& other) const
+    {
+        return intVar_ >= other.intVar_;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, const SampleClassInt& obj);
 
     int intVar_;
@@ -150,6 +180,36 @@ struct SampleClassIntAndStr
     {
         std::cout << "\n" << "SampleClassIntAndStr Destructor() "
                     << intVar_ << " " << strVar_;
+    }
+
+    bool operator==(const SampleClassIntAndStr& other) const
+    {
+        return intVar_ == other.intVar_;
+    }
+
+    bool operator!=(const SampleClassIntAndStr& other) const
+    {
+        return intVar_ != other.intVar_;
+    }
+
+    bool operator<(const SampleClassIntAndStr& other) const
+    {
+        return intVar_ < other.intVar_;
+    }
+
+    bool operator<=(const SampleClassIntAndStr& other) const
+    {
+        return intVar_ <= other.intVar_;
+    }
+
+    bool operator>(const SampleClassIntAndStr& other) const
+    {
+        return intVar_ > other.intVar_;
+    }
+
+    bool operator>=(const SampleClassIntAndStr& other) const
+    {
+        return intVar_ >= other.intVar_;
     }
 
     friend std::ostream& operator<<(std::ostream& os, const SampleClassIntAndStr& obj);
