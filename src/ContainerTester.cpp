@@ -66,13 +66,36 @@ void testContainerOnVector()
 
 void testContainerOnSet()
 {
-    mystl::set<SampleClassInt> myset;
+    mystl::set<double> myset;
 
-    myset.insert(sampleClassInt[2]);
-    myset.insert(sampleClassInt[0]);
-    myset.insert(sampleClassInt[1]);
-    myset.insert(sampleClassInt[5]);
-    myset.insert(sampleClassInt[4]);
+    myset.insert(50);
+    myset.insert(45);
+    myset.insert(40);
+    myset.insert(47);
+    myset.insert(46);
+    myset.insert(55);
+    myset.insert(47);
+    myset.insert(56);
+    myset.insert(51);
+    myset.insert(48);
+    myset.insert(46);
+    myset.insert(47.5);
+    myset.insert(46.5);
+    myset.insert(45.5);
+    myset.insert(54);
+
+    std::cout << "\n upper_bound " << *myset.upper_bound(47);
+    std::cout << "\n upper_bound " << *myset.upper_bound(46.5);
+    std::cout << "\n upper_bound " << *myset.upper_bound(43);
+    std::cout << "\n upper_bound " << *myset.upper_bound(48);
+    std::cout << "\n upper_bound " << *myset.upper_bound(54);
+    std::cout << "\n upper_bound " << *myset.upper_bound(52);
+    std::cout << "\n upper_bound " << *myset.upper_bound(46.6);
+    std::cout << "\n upper_bound " << *myset.upper_bound(20);
+    std::cout << "\n upper_bound " << *myset.upper_bound(50);
+    std::cout << "\n upper_bound " << myset.upper_bound(57);
+    std::cout << "\n upper_bound " << *myset.upper_bound(47.5);
+    std::cout << "\n upper_bound " << *myset.upper_bound(46);
 }
 
 } // namespace
