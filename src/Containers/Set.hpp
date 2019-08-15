@@ -8,7 +8,7 @@
 namespace mystl
 {
 
-template <typename DataType>
+template <typename KeyDataType>
 class set
 {
 public:
@@ -24,13 +24,13 @@ public:
         cleanUpData();
     }
 
-    std::pair<DataType*, bool> insert(const DataType& data)
+    std::pair<KeyDataType*, bool> insert(const KeyDataType& key)
     {
         if (!rootNode_)
         {
-            rootNode_ = new Node{data, nullptr, nullptr};
+            rootNode_ = new Node{key, nullptr, nullptr};
             ++size_;
-            return {&(rootNode_->data), true};
+            return {&(rootNode_->key), true};
         }
 
         Node* currentNode = rootNode_;
@@ -38,15 +38,15 @@ public:
         while (currentNode != nullptr)
         {
             lastNode = currentNode;
-            if (data == currentNode->data)
+            if (key == currentNode->key)
             {
-                return {&(currentNode->data), false};
+                return {&(currentNode->key), false};
             }
-            else if (data < currentNode->data)
+            else if (key < currentNode->key)
             {
                 currentNode = currentNode->leftChildNode;
             }
-            else if (data > currentNode->data)
+            else if (key > currentNode->key)
             {
                 currentNode = currentNode->rightChildNode;
             }
@@ -56,17 +56,17 @@ public:
         {
             return {nullptr, false};
         }
-        else if (data < lastNode->data)
+        else if (key < lastNode->key)
         {
-            lastNode->leftChildNode = new Node{data, nullptr, nullptr};
+            lastNode->leftChildNode = new Node{key, nullptr, nullptr};
             ++size_;
-            return {&(lastNode->leftChildNode->data), true};
+            return {&(lastNode->leftChildNode->key), true};
         }
-        else if (data > lastNode->data)
+        else if (key > lastNode->key)
         {
-            lastNode->rightChildNode = new Node{data, nullptr, nullptr};
+            lastNode->rightChildNode = new Node{key, nullptr, nullptr};
             ++size_;
-            return {&(lastNode->rightChildNode->data), true};
+            return {&(lastNode->rightChildNode->key), true};
         }
         return {nullptr, false};
     }
@@ -76,7 +76,7 @@ public:
 private:
     struct Node
     {
-        DataType data;
+        KeyDataType key;
         Node* leftChildNode;
         Node* rightChildNode;
     };
