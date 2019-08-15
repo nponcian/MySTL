@@ -84,6 +84,9 @@ void testContainerOnSet()
     myset.insert(45.5);
     myset.insert(54);
 
+    printUsingBeginToEndUsingNotEqualCompare(myset);
+    printUsingRangeBasedForLoop(myset);
+
     std::cout << "\n upper_bound " << *myset.upper_bound(47);
     std::cout << "\n upper_bound " << *myset.upper_bound(46.5);
     std::cout << "\n upper_bound " << *myset.upper_bound(43);

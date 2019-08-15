@@ -29,6 +29,26 @@ void printUsingConstBeginToEndUsingLessCompare(const T& t)
 }
 
 template <typename T>
+void printUsingBeginToEndUsingNotEqualCompare(T& t)
+{
+    std::cout << "\n" << __FUNCTION__;
+    for (auto it = t.begin(); it != t.end(); ++it)
+    {
+        std::cout << "\n\t" << *it << " " << &(*it);
+    }
+}
+
+template <typename T>
+void printUsingConstBeginToEndUsingNotEqualCompare(const T& t)
+{
+    std::cout << "\n" << __FUNCTION__ << "...";
+    for (auto it = t.begin(); it != t.end(); ++it)
+    {
+        std::cout << "\n\t" << *it << " " << &(*it);
+    }
+}
+
+template <typename T>
 void printUsingRangeBasedForLoop(T& t)
 {
     std::cout << "\n" << __FUNCTION__ << "...";
