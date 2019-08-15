@@ -4,6 +4,48 @@
 #include <iostream>
 #include <string>
 
+struct SampleClass
+{
+    SampleClass()
+    {
+        std::cout << "\n" << "SampleClass Constructor() ";
+    }
+
+    SampleClass(const SampleClass&)
+    {
+        std::cout << "\n" << "SampleClass Copy Constructor(const& lvalue or rvalue) ";
+    }
+
+    SampleClass(SampleClass&&) /* noexcept */
+    {
+        std::cout << "\n" << "SampleClass Copy Constructor(&& rvalue) ";
+    }
+
+    SampleClass& operator=(const SampleClass&)
+    {
+        std::cout << "\n" << "SampleClass Assignment Operator(const& lvalue or rvalue) ";
+        return *this;
+    }
+
+    SampleClass& operator=(SampleClass&&)
+    {
+        std::cout << "\n" << "SampleClass Assignment Operator(&& rvalue) ";
+        return *this;
+    }
+
+    ~SampleClass()
+    {
+        std::cout << "\n" << "SampleClass Destructor() ";
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const SampleClass& obj);
+};
+
+std::ostream& operator<<(std::ostream& os, const SampleClass&)
+{
+    return os << "print_SampleClass_";
+}
+
 struct SampleClassInt
 {
     SampleClassInt(
