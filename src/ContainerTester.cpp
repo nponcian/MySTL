@@ -68,21 +68,21 @@ void testContainerOnSet()
 {
     mystl::set<double> myset;
 
-    myset.insert(50);
-    myset.insert(45);
-    myset.insert(40);
-    myset.insert(47);
-    myset.insert(46);
-    myset.insert(55);
-    myset.insert(47);
-    myset.insert(56);
-    myset.insert(51);
-    myset.insert(48);
-    myset.insert(46);
-    myset.insert(47.5);
-    myset.insert(46.5);
-    myset.insert(45.5);
-    myset.insert(54);
+    std::cout << "\n" << *myset.insert(50).first;
+    std::cout << "\n" << *myset.insert(45).first;
+    std::cout << "\n" << *myset.insert(40).first;
+    std::cout << "\n" << *myset.insert(47).first;
+    std::cout << "\n" << *myset.insert(46).first;
+    std::cout << "\n" << *myset.insert(55).first;
+    std::cout << "\n" << *myset.insert(47).first;
+    std::cout << "\n" << *myset.insert(56).first;
+    std::cout << "\n" << *myset.insert(51).first;
+    std::cout << "\n" << *myset.insert(48).first;
+    std::cout << "\n" << *myset.insert(46).first;
+    std::cout << "\n" << *myset.insert(47.5).first;
+    std::cout << "\n" << *myset.insert(46.5).first;
+    std::cout << "\n" << *myset.insert(45.5).first;
+    std::cout << "\n" << *myset.insert(54).first;
 
     printUsingBeginToEndUsingNotEqualCompare(myset);
     printUsingRangeBasedForLoop(myset);
@@ -102,7 +102,6 @@ void testContainerOnSet()
 }
 
 } // namespace
-
 
 void testContainer()
 {

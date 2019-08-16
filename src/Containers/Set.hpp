@@ -32,7 +32,8 @@ public:
         using reference = typename std::iterator<std::bidirectional_iterator_tag, KeyDataType>::reference;
 
         iterator() : mySet_(nullptr), lastProcessedKey_(nullptr) {}
-        iterator(mystl::set<KeyDataType>* mySet) : mySet_(mySet) { lastProcessedKey_ = &(mySet_->goToLeftmostNode()->key); }
+        iterator(mystl::set<KeyDataType>* mySet) : mySet_(mySet) { lastProcessedKey_ = mySet_->goToLeftmostKey(); }
+        iterator(mystl::set<KeyDataType>* mySet, KeyDataType* key) : mySet_(mySet), lastProcessedKey_(key) {}
         // iterator(const iterator& other) : pointer_(other.pointer_) {}
         // iterator& operator=(const iterator& other) { pointer_ = other.pointer_; }
 
@@ -69,23 +70,23 @@ public:
         cleanUpData();
     }
 
-    std::pair<pointer, bool> insert(const value_type& value)
+    std::pair<iterator, bool> insert(const value_type& value)
     {
         if (!rootNode_)
         {
             rootNode_ = new Node{value, nullptr, nullptr};
             ++size_;
-            return {&(rootNode_->key), true};
+            return {iterator(this, &(rootNode_->key)), true};
         }
 
         Node* currentNode = rootNode_;
-        Node* lastNode = nullptr;
+        Node* lastNode = rootNode_;
         while (currentNode)
         {
             lastNode = currentNode;
             if (value == currentNode->key)
             {
-                return {&(currentNode->key), false};
+                return {iterator(this, &(currentNode->key)), false};
             }
             else if (value < currentNode->key)
             {
@@ -97,21 +98,17 @@ public:
             }
         }
 
-        if (!lastNode)
-        {
-            return {nullptr, false};
-        }
-        else if (value < lastNode->key)
+        if (value < lastNode->key)
         {
             lastNode->leftChildNode = new Node{value, nullptr, nullptr};
             ++size_;
-            return {&(lastNode->leftChildNode->key), true};
+            return {iterator(this, &(lastNode->leftChildNode->key)), true};
         }
         else if (value > lastNode->key)
         {
             lastNode->rightChildNode = new Node{value, nullptr, nullptr};
             ++size_;
-            return {&(lastNode->rightChildNode->key), true};
+            return {iterator(this, &(lastNode->rightChildNode->key)), true};
         }
         return {nullptr, false};
     }
@@ -135,13 +132,13 @@ public:
         return upper;
     }
 
-    Node* goToLeftmostNode()
+    pointer goToLeftmostKey()
     {
-        Node* leftmost = rootNode_;
+        pointer leftmost = nullptr;
         Node* currentNode = rootNode_;
         while (currentNode)
         {
-            leftmost = currentNode;
+            leftmost = &(currentNode->key);
             currentNode = currentNode->leftChildNode;
         }
         return leftmost;
