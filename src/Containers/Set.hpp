@@ -37,7 +37,7 @@ public:
         // iterator(const iterator& other) : pointer_(other.pointer_) {}
         // iterator& operator=(const iterator& other) { pointer_ = other.pointer_; }
 
-        iterator& operator++() { if (mySet_ && lastProcessedKey_) {lastProcessedKey_ = mySet_->upper_bound(*lastProcessedKey_);} return *this; } // prefix ++a
+        iterator& operator++() { if (mySet_ && lastProcessedKey_) {lastProcessedKey_ = mySet_->upper_bound(*lastProcessedKey_);} return *this; } // prefix ++a // In-order traversal
         iterator operator++(int) { iterator temp(*this); operator++(); return temp; } // postfix a++
 
         // iterator& operator--() { --pointer_; return *this; } // prefix --a
@@ -162,6 +162,7 @@ private:
         deleteTree(rootNode_);
     }
 
+    // Post-order traversal
     void deleteTree(Node* currentNode)
     {
         if (currentNode == nullptr) return;
