@@ -34,8 +34,8 @@ public:
         iterator() : mySet_(nullptr), lastProcessedKey_(nullptr) {}
         iterator(mystl::set<KeyDataType>* mySet) : mySet_(mySet) { lastProcessedKey_ = mySet_->goToLeftmostKey(); }
         iterator(mystl::set<KeyDataType>* mySet, KeyDataType* key) : mySet_(mySet), lastProcessedKey_(key) {}
-        // iterator(const iterator& other) : pointer_(other.pointer_) {}
-        // iterator& operator=(const iterator& other) { pointer_ = other.pointer_; }
+        iterator(const iterator& other) : mySet_(other.mySet_), lastProcessedKey_(other.lastProcessedKey_) {}
+        iterator& operator=(const iterator& other) { mySet_ = other.mySet_; lastProcessedKey_ = other.lastProcessedKey_; }
 
         iterator& operator++() { if (mySet_ && lastProcessedKey_) {lastProcessedKey_ = mySet_->upper_bound(*lastProcessedKey_);} return *this; } // prefix ++a // In-order traversal
         iterator operator++(int) { iterator temp(*this); operator++(); return temp; } // postfix a++
@@ -43,15 +43,11 @@ public:
         // iterator& operator--() { --pointer_; return *this; } // prefix --a
         // iterator operator--(int) { iterator temp(*this); operator--(); return temp; } // postfix a--
 
-        // bool operator<(const iterator& other) const { return pointer_ < other.pointer_; }
-        // bool operator>(const iterator& other) const { return pointer_ > other.pointer_; }
-        // bool operator<=(const iterator& other) const { return pointer_ <= other.pointer_; }
-        // bool operator>=(const iterator& other) const { return pointer_ >= other.pointer_; }
-        // bool operator==(const iterator& other) const { return pointer_ == other.pointer_; }
+        bool operator==(const iterator& other) const { return lastProcessedKey_ == other.lastProcessedKey_; }
         bool operator!=(const iterator& other) const { return lastProcessedKey_ != other.lastProcessedKey_; }
 
         reference operator*() const { return *lastProcessedKey_; }
-        // pointer operator->() const { return pointer_; }
+        pointer operator->() const { return lastProcessedKey_; }
 
     private:
         mystl::set<KeyDataType>* mySet_;
