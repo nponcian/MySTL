@@ -7,21 +7,24 @@
 namespace mystl
 {
 
-bool next_permutation(std::string& stringToPermutateSorted)
+template <typename T>
+bool next_permutation(T& objectToPermutate)
 {
-    for (int ctr = stringToPermutateSorted.size() - 1; ctr > 0; --ctr)
+    for (auto currentIt = objectToPermutate.rbegin(), nextIt = ++(objectToPermutate.rbegin());
+        currentIt != objectToPermutate.rend() and nextIt != objectToPermutate.rend();
+        ++currentIt, ++nextIt)
     {
         // Early continue is nice to avoid such nested {{{}}}. But to be clear with the purpose of
         // this block that finds first occurrence of greater item[ctr] than item[ctr-1] thus is
         // preferred for increased readability of purpose
-        if (stringToPermutateSorted[ctr] > stringToPermutateSorted[ctr-1])
+        if (*currentIt > *nextIt)
         {
-            for (int ctr2 = stringToPermutateSorted.size() - 1; ctr2 >= ctr; --ctr2)
+            for (auto reverseIt = objectToPermutate.rbegin(); reverseIt != nextIt; ++reverseIt)
             {
-                if (stringToPermutateSorted[ctr2] > stringToPermutateSorted[ctr-1])
+                if (*reverseIt > *nextIt)
                 {
-                    std::swap(stringToPermutateSorted[ctr2], stringToPermutateSorted[ctr-1]);
-                    std::sort((stringToPermutateSorted.begin() + ctr), stringToPermutateSorted.end());
+                    std::swap(*reverseIt, *nextIt);
+                    std::sort(nextIt.base(), objectToPermutate.end());
                     return true;
                 }
             }
