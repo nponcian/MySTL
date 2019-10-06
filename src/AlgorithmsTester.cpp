@@ -12,14 +12,27 @@ namespace
 
 void testNextPermutation()
 {
-    std::string name{"abcd"};
     unsigned ctr = 1u;
 
+    std::string letters{"abcd"};
     do
     {
-        std::cout << "\nPermutation #" << ctr++ << " : " << name;
+        std::cout << "\nPermutation #" << ctr++ << " : " << letters;
     }
-    while (mystl::next_permutation(name));
+    while (mystl::next_permutation(letters));
+
+    ctr = 1u;
+
+    std::vector numbers{1, 3, 5, 7};
+    do
+    {
+        std::cout << "\nPermutation #" << ctr++ << " :";
+        for (const auto& num : numbers)
+        {
+            std::cout << " " << num;
+        }
+    }
+    while (mystl::next_permutation(numbers));
 }
 
 } // namespace
