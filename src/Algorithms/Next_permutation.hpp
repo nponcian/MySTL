@@ -1,6 +1,7 @@
 #ifndef SRC_ALGORITHMS_NEXT_PERMUTATION_HPP
 #define SRC_ALGORITHMS_NEXT_PERMUTATION_HPP
 
+#include <algorithm>
 #include <string>
 
 namespace mystl
