@@ -12,32 +12,32 @@ namespace
 {
 
 SampleClassInt sampleClassInt[] =
-{
-    SampleClassInt(0),
-    SampleClassInt(1),
-    SampleClassInt(2),
-    SampleClassInt(3),
-    SampleClassInt(4),
-    SampleClassInt(5),
-    SampleClassInt(6),
-    SampleClassInt(7),
-    SampleClassInt(8),
-    SampleClassInt(9),
-};
+    {
+        SampleClassInt(0),
+        SampleClassInt(1),
+        SampleClassInt(2),
+        SampleClassInt(3),
+        SampleClassInt(4),
+        SampleClassInt(5),
+        SampleClassInt(6),
+        SampleClassInt(7),
+        SampleClassInt(8),
+        SampleClassInt(9),
+    };
 
 SampleClassIntAndStr sampleClassIntAndStr[] =
-{
-    SampleClassIntAndStr(0,"Num0"),
-    SampleClassIntAndStr(1,"Num1"),
-    SampleClassIntAndStr(2,"Num2"),
-    SampleClassIntAndStr(3,"Num3"),
-    SampleClassIntAndStr(4,"Num4"),
-    SampleClassIntAndStr(5,"Num5"),
-    SampleClassIntAndStr(6,"Num6"),
-    SampleClassIntAndStr(7,"Num7"),
-    SampleClassIntAndStr(8,"Num8"),
-    SampleClassIntAndStr(9,"Num9"),
-};
+    {
+        SampleClassIntAndStr(0,"Num0"),
+        SampleClassIntAndStr(1,"Num1"),
+        SampleClassIntAndStr(2,"Num2"),
+        SampleClassIntAndStr(3,"Num3"),
+        SampleClassIntAndStr(4,"Num4"),
+        SampleClassIntAndStr(5,"Num5"),
+        SampleClassIntAndStr(6,"Num6"),
+        SampleClassIntAndStr(7,"Num7"),
+        SampleClassIntAndStr(8,"Num8"),
+        SampleClassIntAndStr(9,"Num9"),
+    };
 
 void testContainerOnVector()
 {
