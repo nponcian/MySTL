@@ -1,12 +1,12 @@
-#ifndef SRC_CONTAINERTESTER_HPP
-#define SRC_CONTAINERTESTER_HPP
+#ifndef SRC_CONTAINERSTESTER_HPP
+#define SRC_CONTAINERSTESTER_HPP
 
 #include <iostream>
 
 namespace src
 {
 
-void testContainer();
+void testContainers();
 
 template <typename T>
 void printUsingBeginToEndUsingLessCompare(T& t)
@@ -90,4 +90,4 @@ void printUsingBracketAndSize(T& t)
 
 } // namespace src
 
-#endif // SRC_CONTAINERTESTER_HPP
+#endif // SRC_CONTAINERSTESTER_HPP

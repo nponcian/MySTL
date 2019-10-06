@@ -1,12 +1,12 @@
 #include <iostream>
 
 #include <AlgorithmsTester.hpp>
-#include <ContainerTester.hpp>
+#include <ContainersTester.hpp>
 
 int main(int /*argc*/, char** /*argv*/)
 {
     std::cout << "\nThis is just a library";
-    src::testContainer();
+    src::testContainers();
     src::testAlgorithms();
 
     std::cout << "\nEnd\n";

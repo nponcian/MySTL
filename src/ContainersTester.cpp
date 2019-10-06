@@ -103,7 +103,7 @@ void testContainerOnSet()
 
 } // namespace
 
-void testContainer()
+void testContainers()
 {
     testContainerOnVector();
     testContainerOnSet();
