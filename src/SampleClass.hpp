@@ -48,47 +48,47 @@ std::ostream& operator<<(std::ostream& os, const SampleClass&)
 
 struct SampleClassInt
 {
-    SampleClassInt(
-        const int intVar) :
-            intVar_(intVar)
+    SampleClassInt(const int intVar) :
+        intVar_(intVar)
     {
         std::cout << "\n" << "SampleClassInt Constructor() " << intVar;
     }
 
     SampleClassInt(const SampleClassInt& other)
     {
-        std::cout << "\n" << "SampleClassInt Copy Constructor(const& lvalue or rvalue) "
-                    << other.intVar_;
+        std::cout << "\n" << "SampleClassInt Copy Constructor(const& lvalue or rvalue) " << other.intVar_;
         intVar_ = other.intVar_;
     }
 
     SampleClassInt(SampleClassInt&& other) /* noexcept */
     {
-        std::cout << "\n" << "SampleClassInt Copy Constructor(&& rvalue) "
-                    << other.intVar_;
+        std::cout << "\n" << "SampleClassInt Copy Constructor(&& rvalue) " << other.intVar_;
         intVar_ = other.intVar_;
+    }
+
+    SampleClassInt(std::initializer_list<int> params) :
+        intVar_(*params.begin())
+    {
+        std::cout << "\n" << "SampleClassInt Constructor(initializer_list) " << *params.begin();
     }
 
     SampleClassInt& operator=(const SampleClassInt& other)
     {
-        std::cout << "\n" << "SampleClassInt Assignment Operator(const& lvalue or rvalue) "
-                    << intVar_;
+        std::cout << "\n" << "SampleClassInt Assignment Operator(const& lvalue or rvalue) " << intVar_;
         intVar_ = other.intVar_;
         return *this;
     }
 
     SampleClassInt& operator=(SampleClassInt&& other)
     {
-        std::cout << "\n" << "SampleClassInt Assignment Operator(&& rvalue) "
-                    << intVar_;
+        std::cout << "\n" << "SampleClassInt Assignment Operator(&& rvalue) " << intVar_;
         intVar_ = other.intVar_;
         return *this;
     }
 
     ~SampleClassInt()
     {
-        std::cout << "\n" << "SampleClassInt Destructor() "
-                    << intVar_;
+        std::cout << "\n" << "SampleClassInt Destructor() " << intVar_;
     }
 
     bool operator==(const SampleClassInt& other) const
